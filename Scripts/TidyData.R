@@ -12,8 +12,8 @@ DataFrameA <- map_df(AllData[1], ~.x)
 DataFrameB <- map_df(AllData[2], ~.x)
 DataFrameC <- map_df(AllData[3], ~.x)
 DataFrameD <- map_df(AllData[4], ~.x)
-DataFrameE <- map_df(AllData[3], ~.x)
-DataFrameF <- map_df(AllData[4], ~.x)
+DataFrameE <- map_df(AllData[5], ~.x)
+DataFrameF <- map_df(AllData[6], ~.x)
 
 #Tidy individual dataframes
 DataFrameA_tidy <- DataFrameA %>% 
@@ -146,15 +146,15 @@ BRETratio_5 <- data.frame(DataFrameE_analysis_5, DataFrameE_analysis_6, DataFram
 BRETratio_6 <- data.frame(DataFrameF_analysis_5, DataFrameF_analysis_6, DataFrameF_analysis_7)
 
 BRETratios1 <- full_join(BRETratio_1, BRETratio_2) # Merging all data into same dataframe
-BRETratios1 <- full_join(BRETratios, BRETratio_3)
+BRETratios1 <- full_join(BRETratios1, BRETratio_3)
 BRETratios2 <- full_join(BRETratio_4, BRETratio_5)
 BRETratios2 <- full_join(BRETratios2, BRETratio_6)
 
-BRETratio_summary5min1 <- data.frame(BRET_ratio = mean(BRETratios[[1]], na.rm=TRUE), sd = sd(BRETratios[[1]], na.rm=TRUE), group = "1", minutes = 5)  #Calculate and store means with SDs
+BRETratio_summary5min1 <- data.frame(BRET_ratio = mean(BRETratios1[[1]], na.rm=TRUE), sd = sd(BRETratios1[[1]], na.rm=TRUE), group = "1", minutes = 5)  #Calculate and store means with SDs
 BRETratio_summary5min2 <- data.frame(BRET_ratio = mean(BRETratios2[[1]], na.rm=TRUE), sd = sd(BRETratios2[[1]], na.rm=TRUE), group = "2", minutes = 5)
-BRETratio_summary6min1 <- data.frame(BRET_ratio = mean(BRETratios[[2]], na.rm=TRUE), sd = sd(BRETratios[[2]], na.rm=TRUE), group = "1", minutes = 6)  #Calculate and store means with SDs
+BRETratio_summary6min1 <- data.frame(BRET_ratio = mean(BRETratios1[[2]], na.rm=TRUE), sd = sd(BRETratios1[[2]], na.rm=TRUE), group = "1", minutes = 6)  #Calculate and store means with SDs
 BRETratio_summary6min2 <- data.frame(BRET_ratio = mean(BRETratios2[[2]], na.rm=TRUE), sd = sd(BRETratios2[[2]], na.rm=TRUE), group = "2", minutes = 6)
-BRETratio_summary7min1 <- data.frame(BRET_ratio = mean(BRETratios[[3]], na.rm=TRUE), sd = sd(BRETratios[[3]], na.rm=TRUE), group = "1", minutes = 7)  #Calculate and store means with SDs
+BRETratio_summary7min1 <- data.frame(BRET_ratio = mean(BRETratios1[[3]], na.rm=TRUE), sd = sd(BRETratios1[[3]], na.rm=TRUE), group = "1", minutes = 7)  #Calculate and store means with SDs
 BRETratio_summary7min2 <- data.frame(BRET_ratio = mean(BRETratios2[[3]], na.rm=TRUE), sd = sd(BRETratios2[[3]], na.rm=TRUE), group = "2", minutes = 7)
 
 
@@ -197,7 +197,7 @@ Graph_A_1 <- ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 Graph_B_1 <- ggplot(subset(DataFrameB_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -205,7 +205,7 @@ Graph_B_1 <- ggplot(subset(DataFrameB_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 Graph_C_1 <- ggplot(subset(DataFrameC_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -213,7 +213,7 @@ Graph_C_1 <- ggplot(subset(DataFrameC_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 Graph_D_1 <- ggplot(subset(DataFrameD_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -221,7 +221,7 @@ Graph_D_1 <- ggplot(subset(DataFrameD_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 Graph_E_1 <- ggplot(subset(DataFrameE_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -229,7 +229,7 @@ Graph_E_1 <- ggplot(subset(DataFrameE_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 Graph_F_1 <- ggplot(subset(DataFrameF_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -237,7 +237,7 @@ Graph_F_1 <- ggplot(subset(DataFrameF_tidier, colour=="blue" | colour=="green"),
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
   theme(legend.position = "none") +
-  ylim(0, 40000)
+  ylim(0, 30000)
 
 # Produce graphs with BRET ratio data as a function of time
 
@@ -247,7 +247,7 @@ Graph_A_2 <- ggplot(subset(DataFrameA_tidier, colour=="BRET_ratio"),
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
   theme(legend.position = "none") +
-  ylim(0, 1.5)
+  ylim(0, 1)
 
 Graph_B_2 <- ggplot(subset(DataFrameB_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -255,7 +255,7 @@ Graph_B_2 <- ggplot(subset(DataFrameB_tidier, colour=="BRET_ratio"),
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
   theme(legend.position = "none") +
-  ylim(0, 1.5)
+  ylim(0, 1)
 
 Graph_C_2 <- ggplot(subset(DataFrameC_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
@@ -263,14 +263,37 @@ Graph_C_2 <- ggplot(subset(DataFrameC_tidier, colour=="BRET_ratio"),
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
   theme(legend.position = "none") +
-  ylim(0, 1.5)
+  ylim(0, 1)
 
+Graph_D_2 <- ggplot(subset(DataFrameD_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1)
 
+Graph_E_2 <- ggplot(subset(DataFrameE_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1)
 
-plot_grid(Graph_A_1, Graph_A_2, Graph_B_1, Graph_B_2, Graph_C_1, Graph_C_2,
-          labels = c("A", "","B", "","C", ""),
+Graph_F_2 <- ggplot(subset(DataFrameF_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1)
+
+plot_grid(Graph_A_1, Graph_B_1, Graph_C_1, Graph_D_1, Graph_E_1, Graph_F_1, Graph_A_2, Graph_B_2, Graph_C_2, Graph_D_2, Graph_E_2, Graph_F_2, 
+          labels = c("A", "B","C", "D","E", "F", "", "", "", "", "", ""),
           nrow = 2,
-          rel_heights = c(1.5,1,1.5,1,1.5,1)
+          rel_heights = c(1,1,1,1,1,1,1,1,1,1,1,1),
+          align="hv"
           )
 
 
