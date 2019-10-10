@@ -1,4 +1,5 @@
 library(tidyverse)
+library(cowplot)
 
 #Load files with unknown names from known folder into R studio
 FileList <- list.files("data", pattern="*.csv")
@@ -175,15 +176,101 @@ graph_analysis <- ggplot(BRETratio_summary, aes(x=minutes, y=BRET_ratio, fill = 
   scale_fill_manual(values=c('#999999','#E69F00'))
 
 ## Plotting - Means and error bar
-##
+# First, DataFrame_tidy has to be tidied -> tidier!
 DataFrameA_tidier <- DataFrameA_tidy %>% 
   gather(colour, signal, -time)
+DataFrameB_tidier <- DataFrameB_tidy %>% 
+  gather(colour, signal, -time)
+DataFrameC_tidier <- DataFrameC_tidy %>% 
+  gather(colour, signal, -time)
+DataFrameD_tidier <- DataFrameD_tidy %>% 
+  gather(colour, signal, -time)
+DataFrameE_tidier <- DataFrameE_tidy %>% 
+  gather(colour, signal, -time)
+DataFrameF_tidier <- DataFrameF_tidy %>% 
+  gather(colour, signal, -time)
 
-ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"), 
+# Produce graphs with bioluminescence data as a function of time
+Graph_A_1 <- ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"), 
        aes(x=as.numeric(time), y=as.numeric(signal))) + 
-  geom_point() +
-  labs(title="Signal as function of time", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
-  scale_x_continuous()
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
 
+Graph_B_1 <- ggplot(subset(DataFrameB_tidier, colour=="blue" | colour=="green"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
+
+Graph_C_1 <- ggplot(subset(DataFrameC_tidier, colour=="blue" | colour=="green"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
+
+Graph_D_1 <- ggplot(subset(DataFrameD_tidier, colour=="blue" | colour=="green"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
+
+Graph_E_1 <- ggplot(subset(DataFrameE_tidier, colour=="blue" | colour=="green"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
+
+Graph_F_1 <- ggplot(subset(DataFrameF_tidier, colour=="blue" | colour=="green"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme(legend.position = "none") +
+  ylim(0, 40000)
+
+# Produce graphs with BRET ratio data as a function of time
+
+Graph_A_2 <- ggplot(subset(DataFrameA_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1.5)
+
+Graph_B_2 <- ggplot(subset(DataFrameB_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1.5)
+
+Graph_C_2 <- ggplot(subset(DataFrameC_tidier, colour=="BRET_ratio"), 
+                    aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point(aes(colour = colour)) +
+  labs(title="", x="time [sec]", y = "BRET ratio") +
+  scale_colour_manual(values = "black") + 
+  theme(legend.position = "none") +
+  ylim(0, 1.5)
+
+
+
+plot_grid(Graph_A_1, Graph_A_2, Graph_B_1, Graph_B_2, Graph_C_1, Graph_C_2,
+          labels = c("A", "","B", "","C", ""),
+          nrow = 2,
+          rel_heights = c(1.5,1,1.5,1,1.5,1)
+          )
 
 
