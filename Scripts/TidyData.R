@@ -196,6 +196,7 @@ Graph_A_1 <- ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank()) +
@@ -207,6 +208,7 @@ Graph_B_1 <- ggplot(subset(DataFrameB_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -220,6 +222,7 @@ Graph_C_1 <- ggplot(subset(DataFrameC_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -233,6 +236,7 @@ Graph_D_1 <- ggplot(subset(DataFrameD_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -246,6 +250,7 @@ Graph_E_1 <- ggplot(subset(DataFrameE_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -259,6 +264,7 @@ Graph_F_1 <- ggplot(subset(DataFrameF_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
@@ -274,6 +280,7 @@ Graph_A_2 <- ggplot(subset(DataFrameA_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
+  theme_light() +
   theme(legend.position = "none") +
   ylim(0, 1) +
   xlim(0, 600)
@@ -283,6 +290,7 @@ Graph_B_2 <- ggplot(subset(DataFrameB_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.y = element_blank(),
         axis.text.y = element_blank()) +
@@ -294,6 +302,7 @@ Graph_C_2 <- ggplot(subset(DataFrameC_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.y = element_blank(),
         axis.text.y = element_blank()) +
@@ -305,6 +314,7 @@ Graph_D_2 <- ggplot(subset(DataFrameD_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.y = element_blank(),
         axis.text.y = element_blank()) +
@@ -316,6 +326,7 @@ Graph_E_2 <- ggplot(subset(DataFrameE_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
+  theme_light() +
   theme(legend.position = "none",
         axis.title.y = element_blank(),
         axis.text.y = element_blank()) +
@@ -327,7 +338,7 @@ Graph_F_2 <- ggplot(subset(DataFrameF_tidier, colour=="BRET_ratio"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme_minimal_hgrid(12) +
+  theme_light() +
   theme(legend.position = "none",
         axis.title.y = element_blank(),
         axis.text.y = element_blank()) +
