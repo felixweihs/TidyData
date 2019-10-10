@@ -196,48 +196,76 @@ Graph_A_1 <- ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"),
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 Graph_B_1 <- ggplot(subset(DataFrameB_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 Graph_C_1 <- ggplot(subset(DataFrameC_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 Graph_D_1 <- ggplot(subset(DataFrameD_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 Graph_E_1 <- ggplot(subset(DataFrameE_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 Graph_F_1 <- ggplot(subset(DataFrameF_tidier, colour=="blue" | colour=="green"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
   scale_colour_manual(values = c("blue", "#31a354")) + 
-  theme(legend.position = "none") +
-  ylim(0, 30000)
+  theme(legend.position = "none",
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 30000) +
+  xlim(0, 600)
 
 # Produce graphs with BRET ratio data as a function of time
 
@@ -247,53 +275,77 @@ Graph_A_2 <- ggplot(subset(DataFrameA_tidier, colour=="BRET_ratio"),
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
   theme(legend.position = "none") +
-  ylim(0, 1)
+  ylim(0, 1) +
+  xlim(0, 600)
 
 Graph_B_2 <- ggplot(subset(DataFrameB_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme(legend.position = "none") +
-  ylim(0, 1)
+  theme(legend.position = "none",
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 1) +
+  xlim(0, 600)
 
 Graph_C_2 <- ggplot(subset(DataFrameC_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme(legend.position = "none") +
-  ylim(0, 1)
+  theme(legend.position = "none",
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 1) +
+  xlim(0, 600)
 
 Graph_D_2 <- ggplot(subset(DataFrameD_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme(legend.position = "none") +
-  ylim(0, 1)
+  theme(legend.position = "none",
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 1) +
+  xlim(0, 600)
 
 Graph_E_2 <- ggplot(subset(DataFrameE_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme(legend.position = "none") +
-  ylim(0, 1)
+  theme(legend.position = "none",
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 1) +
+  xlim(0, 600)
 
 Graph_F_2 <- ggplot(subset(DataFrameF_tidier, colour=="BRET_ratio"), 
                     aes(x=as.numeric(time), y=as.numeric(signal))) + 
   geom_point(aes(colour = colour)) +
   labs(title="", x="time [sec]", y = "BRET ratio") +
   scale_colour_manual(values = "black") + 
-  theme(legend.position = "none") +
-  ylim(0, 1)
+  theme_minimal_hgrid(12) +
+  theme(legend.position = "none",
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank()) +
+  ylim(0, 1) +
+  xlim(0, 600)
 
-plot_grid(Graph_A_1, Graph_B_1, Graph_C_1, Graph_D_1, Graph_E_1, Graph_F_1, Graph_A_2, Graph_B_2, Graph_C_2, Graph_D_2, Graph_E_2, Graph_F_2, 
-          labels = c("A", "B","C", "D","E", "F", "", "", "", "", "", ""),
-          nrow = 2,
-          rel_heights = c(1,1,1,1,1,1,1,1,1,1,1,1),
-          align="hv"
-          )
+toprow_plot <- plot_grid(NULL, graph_analysis, NULL, 
+                         rel_widths = c(0.6,1,0.6),
+                         nrow = 1)
+middlerow_plot <- plot_grid(Graph_A_1, Graph_B_1, Graph_C_1, Graph_D_1, Graph_E_1, Graph_F_1, 
+                            labels = c("A", "B","C", "D","E", "F"),
+                            nrow = 1,
+                            rel_widths = c(1.4,1,1,1,1,1))
+bottomrow_plot <- plot_grid(Graph_A_2, Graph_B_2, Graph_C_2, Graph_D_2, Graph_E_2, Graph_F_2, 
+                            nrow = 1,
+                            rel_widths = c(1.4,1,1,1,1,1))
+graph_plot <- plot_grid (toprow_plot, middlerow_plot, bottomrow_plot, 
+                         ncol = 1,
+                         rel_heights = c(1.5,1,1))
 
 
