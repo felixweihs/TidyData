@@ -1,9 +1,10 @@
 library(tidyverse)
 
 #Load files with unknown names from known folder into R studio
+FileList <- list.files("data", pattern="*.csv")
 setwd("data")
-FileList <- list.files(pattern="*.csv")
 AllData <- lapply(FileList, read_csv)
+setwd("C:/#IRS-BRET/Conferences and Workshops/DataSchool FOCUS/Projects/TidyData")
 
 #Extract individual dataframes from nested lists
 DataFrameA <- map_df(AllData[1], ~.x) 
@@ -148,17 +149,41 @@ BRETratios1 <- full_join(BRETratios, BRETratio_3)
 BRETratios2 <- full_join(BRETratio_4, BRETratio_5)
 BRETratios2 <- full_join(BRETratios2, BRETratio_6)
 
-BRETratio_summary1 <- data.frame(BRET_ratio = mean(BRETratios[[1]], na.rm=TRUE), sd = sd(BRETratios[[1]], na.rm=TRUE), group = "1")  #Calculate and store means with SDs
-BRETratio_summary2 <- data.frame(BRET_ratio = mean(BRETratios2[[1]], na.rm=TRUE), sd = sd(BRETratios2[[1]], na.rm=TRUE), group = "2")
-BRETratio_summary <- full_join(BRETratio_summary1, BRETratio_summary2)
+BRETratio_summary5min1 <- data.frame(BRET_ratio = mean(BRETratios[[1]], na.rm=TRUE), sd = sd(BRETratios[[1]], na.rm=TRUE), group = "1", minutes = 5)  #Calculate and store means with SDs
+BRETratio_summary5min2 <- data.frame(BRET_ratio = mean(BRETratios2[[1]], na.rm=TRUE), sd = sd(BRETratios2[[1]], na.rm=TRUE), group = "2", minutes = 5)
+BRETratio_summary6min1 <- data.frame(BRET_ratio = mean(BRETratios[[2]], na.rm=TRUE), sd = sd(BRETratios[[2]], na.rm=TRUE), group = "1", minutes = 6)  #Calculate and store means with SDs
+BRETratio_summary6min2 <- data.frame(BRET_ratio = mean(BRETratios2[[2]], na.rm=TRUE), sd = sd(BRETratios2[[2]], na.rm=TRUE), group = "2", minutes = 6)
+BRETratio_summary7min1 <- data.frame(BRET_ratio = mean(BRETratios[[3]], na.rm=TRUE), sd = sd(BRETratios[[3]], na.rm=TRUE), group = "1", minutes = 7)  #Calculate and store means with SDs
+BRETratio_summary7min2 <- data.frame(BRET_ratio = mean(BRETratios2[[3]], na.rm=TRUE), sd = sd(BRETratios2[[3]], na.rm=TRUE), group = "2", minutes = 7)
 
+
+
+BRETratio_summary <- full_join(BRETratio_summary5min1, BRETratio_summary5min2)
+BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary6min1)
+BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary6min2)
+BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary7min1)
+BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary7min2)
 
 ## Plotting - Means and error bar
 ##
-ggplot(BRETratio_summary, aes(x=incubation, y=BRET_ratio, fill = group)) + 
+graph_analysis <- ggplot(BRETratio_summary, aes(x=minutes, y=BRET_ratio, fill = group)) + 
   geom_bar(stat="identity", color="black", position=position_dodge()) +
   geom_errorbar(aes(ymin=BRET_ratio, ymax=BRET_ratio+sd), width=0.2,
                 position=position_dodge(.9)) +
-  labs(title="BRET Ratio comparison", x="Group", y = "BRET Ratio") +
-  theme_classic() +
+  labs(title="BRET Ratio comparison", x="Incubation time [min]", y = "BRET Ratio") +
+  theme_bw() +
   scale_fill_manual(values=c('#999999','#E69F00'))
+
+## Plotting - Means and error bar
+##
+DataFrameA_tidier <- DataFrameA_tidy %>% 
+  gather(colour, signal, -time)
+
+ggplot(subset(DataFrameA_tidier, colour=="blue" | colour=="green"), 
+       aes(x=as.numeric(time), y=as.numeric(signal))) + 
+  geom_point() +
+  labs(title="Signal as function of time", x="time [sec]", y = "Bioluminescence signal [A.U.]") +
+  scale_x_continuous()
+
+
+
