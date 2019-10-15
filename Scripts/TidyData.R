@@ -2,10 +2,11 @@ library(tidyverse)
 library(cowplot)
 
 #Load files with unknown names from known folder into R studio
-FileList <- list.files("data", pattern="*.csv")
+FileList <- list.files(path = "data", pattern="*.csv")
 setwd("data")
-AllData <- lapply(FileList, read_csv)
+AllData <- lapply(FileList, read_csv) %>% reduce(inner_join(by = "Date/Time"))
 setwd("C:/#IRS-BRET/Conferences and Workshops/DataSchool FOCUS/Projects/TidyData")
+
 
 #Extract individual dataframes from nested lists
 DataFrameA <- map_df(AllData[1], ~.x) 
@@ -157,13 +158,12 @@ BRETratio_summary6min2 <- data.frame(BRET_ratio = mean(BRETratios2[[2]], na.rm=T
 BRETratio_summary7min1 <- data.frame(BRET_ratio = mean(BRETratios1[[3]], na.rm=TRUE), sd = sd(BRETratios1[[3]], na.rm=TRUE), group = "1", minutes = 7)  #Calculate and store means with SDs
 BRETratio_summary7min2 <- data.frame(BRET_ratio = mean(BRETratios2[[3]], na.rm=TRUE), sd = sd(BRETratios2[[3]], na.rm=TRUE), group = "2", minutes = 7)
 
-
-
-BRETratio_summary <- full_join(BRETratio_summary5min1, BRETratio_summary5min2)
-BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary6min1)
-BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary6min2)
-BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary7min1)
-BRETratio_summary <- full_join(BRETratio_summary, BRETratio_summary7min2)
+BRETratio_summary <- list(BRETratio_summary5min1,
+                          BRETratio_summary5min2,
+                          BRETratio_summary6min1,
+                          BRETratio_summary6min2,
+                          BRETratio_summary7min1,
+                          BRETratio_summary7min2) %>% reduce(full_join)
 
 ## Plotting - Means and error bar
 ##
