@@ -137,7 +137,7 @@ DataFrameF_analysis_7 <- DataFrameF_tidy %>%
   filter(row_number() >= 840, row_number() <= 880) %>%  
   summarise(seven_min = mean(BRET_ratio)) 
 
-## Putting BRET ratios together and calculate means and STD
+## Putting BRET ratios together and calculate means and SD
 ##
 BRETratio_1 <- data.frame(DataFrameA_analysis_5, DataFrameA_analysis_6, DataFrameA_analysis_7)
 BRETratio_2 <- data.frame(DataFrameB_analysis_5, DataFrameB_analysis_6, DataFrameB_analysis_7)
@@ -151,19 +151,22 @@ BRETratios1 <- full_join(BRETratios1, BRETratio_3)
 BRETratios2 <- full_join(BRETratio_4, BRETratio_5)
 BRETratios2 <- full_join(BRETratios2, BRETratio_6)
 
-BRETratio_summary5min1 <- data.frame(BRET_ratio = mean(BRETratios1[[1]], na.rm=TRUE), sd = sd(BRETratios1[[1]], na.rm=TRUE), group = "1", minutes = 5)  #Calculate and store means with SDs
-BRETratio_summary5min2 <- data.frame(BRET_ratio = mean(BRETratios2[[1]], na.rm=TRUE), sd = sd(BRETratios2[[1]], na.rm=TRUE), group = "2", minutes = 5)
-BRETratio_summary6min1 <- data.frame(BRET_ratio = mean(BRETratios1[[2]], na.rm=TRUE), sd = sd(BRETratios1[[2]], na.rm=TRUE), group = "1", minutes = 6)  #Calculate and store means with SDs
-BRETratio_summary6min2 <- data.frame(BRET_ratio = mean(BRETratios2[[2]], na.rm=TRUE), sd = sd(BRETratios2[[2]], na.rm=TRUE), group = "2", minutes = 6)
-BRETratio_summary7min1 <- data.frame(BRET_ratio = mean(BRETratios1[[3]], na.rm=TRUE), sd = sd(BRETratios1[[3]], na.rm=TRUE), group = "1", minutes = 7)  #Calculate and store means with SDs
-BRETratio_summary7min2 <- data.frame(BRET_ratio = mean(BRETratios2[[3]], na.rm=TRUE), sd = sd(BRETratios2[[3]], na.rm=TRUE), group = "2", minutes = 7)
 
-BRETratio_summary <- list(BRETratio_summary5min1,
-                          BRETratio_summary5min2,
-                          BRETratio_summary6min1,
-                          BRETratio_summary6min2,
-                          BRETratio_summary7min1,
-                          BRETratio_summary7min2) %>% reduce(full_join)
+
+BRETratio_summary <- tibble(BRET_ratio = numeric(), sd = numeric(), group = numeric(), minutes = numeric())
+
+for(i in 1:ncol(BRETratios1)){
+  BRETratio_summary <- add_row(BRETratio_summary, 
+                                    BRET_ratio = apply(BRETratios1[i],2,mean),
+                                    sd = apply(BRETratios1[i],2,sd),
+                                    group = "1", 
+                                    minutes = 4 + i)}
+for(i in 1:ncol(BRETratios2)){
+  BRETratio_summary <- add_row(BRETratio_summary, 
+                                    BRET_ratio = apply(BRETratios2[i],2,mean),
+                                    sd = apply(BRETratios2[i],2,sd),
+                                    group = "2", 
+                                    minutes = 4 + i)}
 
 ## Plotting - Means and error bar
 ##
