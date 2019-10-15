@@ -16,42 +16,24 @@ DataFrameD <- map_df(AllData[4], ~.x)
 DataFrameE <- map_df(AllData[5], ~.x)
 DataFrameF <- map_df(AllData[6], ~.x)
 
-#Tidy individual dataframes
-DataFrameA_tidy <- DataFrameA %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
+#Tidy dataframes using a created function 
 
-DataFrameB_tidy <- DataFrameB %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
+#Create and save tidy function
+tidy_function <- function(x) {
+  x %>% 
+  slice(8:2000) %>%
+  select(1:3) %>% 
+  rename(time = 1, green = 2, blue = 3) %>% 
+  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue))
+}
 
-DataFrameC_tidy <- DataFrameC %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
-
-DataFrameD_tidy <- DataFrameD %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
-
-DataFrameE_tidy <- DataFrameE %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
-
-DataFrameF_tidy <- DataFrameF %>% 
-  slice(8:2000) %>% #Remove annotations that were automatically created by the CYBERTONGUE
-  select(1:3) %>% #Remove ratios column -> Inaccurate values
-  rename(time = 1, green = 2, blue = 3) %>% #Rename columns into sensible headers
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
+#Execute tidy_function with all dataframes
+DataFrameA_tidy <- tidy_function (DataFrameA)
+DataFrameB_tidy <- tidy_function (DataFrameB) 
+DataFrameC_tidy <- tidy_function (DataFrameC) 
+DataFrameD_tidy <- tidy_function (DataFrameD) 
+DataFrameE_tidy <- tidy_function (DataFrameE) 
+DataFrameF_tidy <- tidy_function (DataFrameF)
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameA
 DataFrameA_analysis <- list()
