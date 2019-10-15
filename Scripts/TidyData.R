@@ -54,104 +54,103 @@ DataFrameF_tidy <- DataFrameF %>%
   mutate(BRET_ratio = as.numeric(green) / as.numeric(blue)) #Calculate and add column with BRET ratios
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameA
-DataFrameA_analysis_5 <- DataFrameA_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameA_analysis_6 <- DataFrameA_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameA_analysis_7 <- DataFrameA_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameA_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameA_analysis[1] <- subset(DataFrameA_tidy, time >=300 & time <= 320) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameA_analysis[2] <- subset(DataFrameA_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameA_analysis[3] <- subset(DataFrameA_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameB
-DataFrameB_analysis_5 <- DataFrameB_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameB_analysis_6 <- DataFrameB_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameB_analysis_7 <- DataFrameB_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameB_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameB_analysis[1] <- subset(DataFrameB_tidy, time >=300 & time <= 320) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameB_analysis[2] <- subset(DataFrameB_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameB_analysis[3] <- subset(DataFrameB_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameC
-DataFrameC_analysis_5 <- DataFrameC_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameC_analysis_6 <- DataFrameC_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameC_analysis_7 <- DataFrameC_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameC_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameC_analysis[1] <- subset(DataFrameC_tidy, time >=300 & time <= 320) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameC_analysis[2] <- subset(DataFrameC_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameC_analysis[3] <- subset(DataFrameC_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameD_analysis_5 <- DataFrameD_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameD_analysis_6 <- DataFrameD_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameD_analysis_7 <- DataFrameD_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameD_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameD_analysis[1] <- subset(DataFrameD_tidy, time >=300 & time <= 320) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameD_analysis[2] <- subset(DataFrameD_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameD_analysis[3] <- subset(DataFrameD_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameE_analysis_5 <- DataFrameE_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameE_analysis_6 <- DataFrameE_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameE_analysis_7 <- DataFrameE_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameE_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameE_analysis[1] <- subset(DataFrameE_tidy, time >=300 & time <= 320) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameE_analysis[2] <- subset(DataFrameE_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameE_analysis[3] <- subset(DataFrameE_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 #Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameF_analysis_5 <- DataFrameF_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 600, row_number() <= 640) %>%  
-  summarise(five_min = mean(BRET_ratio)) 
-DataFrameF_analysis_6 <- DataFrameF_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 720, row_number() <= 760) %>%  
-  summarise(six_min = mean(BRET_ratio)) 
-DataFrameF_analysis_7 <- DataFrameF_tidy %>% 
-  select(time, BRET_ratio) %>% 
-  filter(row_number() >= 840, row_number() <= 880) %>%  
-  summarise(seven_min = mean(BRET_ratio)) 
+DataFrameF_analysis <- list()
+for (i in 1:3) {
+  if (i == 1) {
+    DataFrameF_analysis[1] <- subset(DataFrameF_tidy, time >=300 & time <= 320) %>% 
+    summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameF_analysis[2] <- subset(DataFrameF_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameF_analysis[3] <- subset(DataFrameF_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
 
 ## Putting BRET ratios together and calculate means and SD
 ##
-BRETratio_1 <- data.frame(DataFrameA_analysis_5, DataFrameA_analysis_6, DataFrameA_analysis_7)
-BRETratio_2 <- data.frame(DataFrameB_analysis_5, DataFrameB_analysis_6, DataFrameB_analysis_7)
-BRETratio_3 <- data.frame(DataFrameC_analysis_5, DataFrameC_analysis_6, DataFrameC_analysis_7)
-BRETratio_4 <- data.frame(DataFrameD_analysis_5, DataFrameD_analysis_6, DataFrameD_analysis_7)
-BRETratio_5 <- data.frame(DataFrameE_analysis_5, DataFrameE_analysis_6, DataFrameE_analysis_7)
-BRETratio_6 <- data.frame(DataFrameF_analysis_5, DataFrameF_analysis_6, DataFrameF_analysis_7)
+BRETratios1 = data.frame(minute_5= numeric(), minute_6= numeric(), minute_7 = numeric())
+for(i in 1:3){
+  BRETratios1 <- add_row(BRETratios1, minute_5 = DataFrameF_analysis[i])
+  rename(BRETratios1, BRETratio5 = BRETratio[i])
+}
 
-BRETratios1 <- full_join(BRETratio_1, BRETratio_2) # Merging all data into same dataframe
-BRETratios1 <- full_join(BRETratios1, BRETratio_3)
-BRETratios2 <- full_join(BRETratio_4, BRETratio_5)
-BRETratios2 <- full_join(BRETratios2, BRETratio_6)
-
-
+BRETratios1 <- data.frame("minute_5" = c(as.numeric(DataFrameA_analysis[1]),as.numeric(DataFrameB_analysis[1]),as.numeric(DataFrameC_analysis[1])),
+                          "minute_6" = c(as.numeric(DataFrameA_analysis[2]),as.numeric(DataFrameB_analysis[2]),as.numeric(DataFrameC_analysis[2])),
+                          "minute_7" = c(as.numeric(DataFrameA_analysis[3]),as.numeric(DataFrameB_analysis[3]),as.numeric(DataFrameC_analysis[3])))
+BRETratios2 <- data.frame("minute_5" = c(as.numeric(DataFrameD_analysis[1]),as.numeric(DataFrameE_analysis[1]),as.numeric(DataFrameF_analysis[1])),
+                          "minute_6" = c(as.numeric(DataFrameD_analysis[2]),as.numeric(DataFrameE_analysis[2]),as.numeric(DataFrameF_analysis[2])),
+                          "minute_7" = c(as.numeric(DataFrameD_analysis[3]),as.numeric(DataFrameE_analysis[3]),as.numeric(DataFrameF_analysis[3])))
 
 BRETratio_summary <- tibble(BRET_ratio = numeric(), sd = numeric(), group = numeric(), minutes = numeric())
 
