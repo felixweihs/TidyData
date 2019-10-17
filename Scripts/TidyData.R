@@ -5,144 +5,49 @@ library(cowplot)
 FileList <- list.files(path = "data", pattern="*.csv", full.names = TRUE)
 AllData <- map_df(FileList, read_csv, skip = 7, .id = "dataset") 
 
-#Tidy dataframes using a created function 
+#Replace Ratio calculation by more exact measurements and group by datasets
+AllData_tidy <- AllData %>% 
+  mutate(Ratio = as.numeric(Green) / as.numeric(Blue)) %>% 
+  mutate(dataset = as.numeric(dataset)) %>% 
+  group_by(dataset)
 
-#Create and save tidy function
-tidy_function <- function(x) {
-  x %>% 
-  slice(8:2000) %>%
-  select(1:3) %>% 
-  rename(time = 1, green = 2, blue = 3) %>% 
-  mutate(BRET_ratio = as.numeric(green) / as.numeric(blue))
-}
+#Analysis
+analysis_5 <- subset(AllData_tidy, Time >=300 & Time <= 320) %>% 
+      summarise(five_min = mean(Ratio))
+analysis_6 <- subset(AllData_tidy, Time >=360 & Time <= 380) %>% 
+  summarise(six_min = mean(Ratio))
+analysis_7 <- subset(AllData_tidy, Time >=420 & Time <= 440) %>% 
+  summarise(seven_min = mean(Ratio))
+analysis <- full_join(analysis_5, analysis_6)
+analysis <- full_join(analysis, analysis_7)
 
-#Execute tidy_function with all dataframes
-DataFrameA_tidy <- tidy_function (DataFrameA)
-DataFrameB_tidy <- tidy_function (DataFrameB) 
-DataFrameC_tidy <- tidy_function (DataFrameC) 
-DataFrameD_tidy <- tidy_function (DataFrameD) 
-DataFrameE_tidy <- tidy_function (DataFrameE) 
-DataFrameF_tidy <- tidy_function (DataFrameF)
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameA
-DataFrameA_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameA_analysis[1] <- subset(DataFrameA_tidy, time >=300 & time <= 320) %>% 
-      summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameA_analysis[2] <- subset(DataFrameA_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameA_analysis[3] <- subset(DataFrameA_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameB
-DataFrameB_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameB_analysis[1] <- subset(DataFrameB_tidy, time >=300 & time <= 320) %>% 
-      summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameB_analysis[2] <- subset(DataFrameB_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameB_analysis[3] <- subset(DataFrameB_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameC
-DataFrameC_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameC_analysis[1] <- subset(DataFrameC_tidy, time >=300 & time <= 320) %>% 
-      summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameC_analysis[2] <- subset(DataFrameC_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameC_analysis[3] <- subset(DataFrameC_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameD_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameD_analysis[1] <- subset(DataFrameD_tidy, time >=300 & time <= 320) %>% 
-      summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameD_analysis[2] <- subset(DataFrameD_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameD_analysis[3] <- subset(DataFrameD_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameE_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameE_analysis[1] <- subset(DataFrameE_tidy, time >=300 & time <= 320) %>% 
-      summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameE_analysis[2] <- subset(DataFrameE_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameE_analysis[3] <- subset(DataFrameE_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
-
-#Several BRET ratio calculation in one dataframe for individual dataframes DataFrameD
-DataFrameF_analysis <- list()
-for (i in 1:3) {
-  if (i == 1) {
-    DataFrameF_analysis[1] <- subset(DataFrameF_tidy, time >=300 & time <= 320) %>% 
-    summarise(five_min = mean(BRET_ratio))}
-  if (i == 2) {
-    DataFrameF_analysis[2] <- subset(DataFrameF_tidy, time >=360 & time <= 380) %>% 
-      summarise(six_min = mean(BRET_ratio))}
-  if (i == 3) {
-    DataFrameF_analysis[3] <- subset(DataFrameF_tidy, time >=420 & time <= 440) %>% 
-      summarise(seven_min = mean(BRET_ratio))}
-}
+#Mutate datasets into groups
+analysis_summary <- analysis %>% 
+  mutate(dataset = case_when(
+      dataset == "1" ~ "1",
+      dataset == "2" ~ "1",
+      dataset == "3" ~ "1",
+      dataset == "4" ~ "2",
+      dataset == "5" ~ "2",
+      dataset == "6" ~ "2",
+      dataset == "7" ~ "3",
+      dataset == "8" ~ "3",
+      dataset == "9" ~ "3")) %>% 
+  group_by(dataset)
 
 ## Putting BRET ratios together and calculate means and SD
-##
-BRETratios1 = data.frame(minute_5= numeric(), minute_6= numeric(), minute_7 = numeric())
-for(i in 1:3){
-  BRETratios1 <- add_row(BRETratios1, minute_5 = DataFrameF_analysis[i])
-  rename(BRETratios1, BRETratio5 = BRETratio[i])
-}
+analysis_summary5 <- summarise(analysis_summary, BRET_ratio = mean(five_min), SD = sd(five_min)) %>% add_column(minutes = 5)
+analysis_summary6 <- summarise(analysis_summary, BRET_ratio = mean(six_min), SD = sd(six_min)) %>% add_column(minutes = 6)
+analysis_summary7 <- summarise(analysis_summary, BRET_ratio = mean(seven_min), SD = sd(seven_min)) %>% add_column(minutes = 7)
 
-BRETratios1 <- data.frame("minute_5" = c(as.numeric(DataFrameA_analysis[1]),as.numeric(DataFrameB_analysis[1]),as.numeric(DataFrameC_analysis[1])),
-                          "minute_6" = c(as.numeric(DataFrameA_analysis[2]),as.numeric(DataFrameB_analysis[2]),as.numeric(DataFrameC_analysis[2])),
-                          "minute_7" = c(as.numeric(DataFrameA_analysis[3]),as.numeric(DataFrameB_analysis[3]),as.numeric(DataFrameC_analysis[3])))
-BRETratios2 <- data.frame("minute_5" = c(as.numeric(DataFrameD_analysis[1]),as.numeric(DataFrameE_analysis[1]),as.numeric(DataFrameF_analysis[1])),
-                          "minute_6" = c(as.numeric(DataFrameD_analysis[2]),as.numeric(DataFrameE_analysis[2]),as.numeric(DataFrameF_analysis[2])),
-                          "minute_7" = c(as.numeric(DataFrameD_analysis[3]),as.numeric(DataFrameE_analysis[3]),as.numeric(DataFrameF_analysis[3])))
-
-BRETratio_summary <- tibble(BRET_ratio = numeric(), sd = numeric(), group = numeric(), minutes = numeric())
-
-for(i in 1:ncol(BRETratios1)){
-  BRETratio_summary <- add_row(BRETratio_summary, 
-                                    BRET_ratio = apply(BRETratios1[i],2,mean),
-                                    sd = apply(BRETratios1[i],2,sd),
-                                    group = "1", 
-                                    minutes = 4 + i)}
-for(i in 1:ncol(BRETratios2)){
-  BRETratio_summary <- add_row(BRETratio_summary, 
-                                    BRET_ratio = apply(BRETratios2[i],2,mean),
-                                    sd = apply(BRETratios2[i],2,sd),
-                                    group = "2", 
-                                    minutes = 4 + i)}
+BRETratio_summary <- full_join(analysis_summary5, analysis_summary6)
+BRETratio_summary <- full_join(BRETratio_summary, analysis_summary7)
 
 ## Plotting - Means and error bar
 ##
-graph_analysis <- ggplot(BRETratio_summary, aes(x=minutes, y=BRET_ratio, fill = group)) + 
+graph_analysis <- ggplot(BRETratio_summary, aes(x=minutes, y=BRET_ratio, fill = dataset)) + 
   geom_bar(stat="identity", color="black", position=position_dodge()) +
-  geom_errorbar(aes(ymin=BRET_ratio, ymax=BRET_ratio+sd), width=0.2,
+  geom_errorbar(aes(ymin=BRET_ratio, ymax=BRET_ratio+SD), width=0.2,
                 position=position_dodge(.9)) +
   labs(title="BRET Ratio comparison", x="Incubation time [min]", y = "BRET Ratio") +
   theme_bw() +
