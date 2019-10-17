@@ -25,3 +25,26 @@ DataFrameA_analysis <- DataFrameA_tidy %>%
   filter(row_number() >= 600) %>% 
   filter(row_number() <= 41) %>% 
   summarise(mean(BRET_ratio))
+
+#Create and save tidy function
+tidy_function <- function(x) {
+  x %>% 
+    slice(8:2000) %>%
+    select(1:3) %>% 
+    rename(time = 1, green = 2, blue = 3) %>% 
+    mutate(BRET_ratio = as.numeric(green) / as.numeric(blue))
+}
+
+#Calculate BRET ratios
+for (i in 1:3) {
+  if (i == 1) {
+    analysis_A <- subset(AllData_tidy, time >=300 & time <= 320 ) %>% 
+      summarise(five_min = mean(BRET_ratio))}
+  if (i == 2) {
+    DataFrameA_analysis[2] <- subset(DataFrameA_tidy, time >=360 & time <= 380) %>% 
+      summarise(six_min = mean(BRET_ratio))}
+  if (i == 3) {
+    DataFrameA_analysis[3] <- subset(DataFrameA_tidy, time >=420 & time <= 440) %>% 
+      summarise(seven_min = mean(BRET_ratio))}
+}
+
