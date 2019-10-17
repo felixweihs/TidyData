@@ -2,19 +2,8 @@ library(tidyverse)
 library(cowplot)
 
 #Load files with unknown names from known folder into R studio
-FileList <- list.files(path = "data", pattern="*.csv")
-setwd("data")
-AllData <- lapply(FileList, read_csv) %>% reduce(inner_join(by = "Date/Time"))
-setwd("C:/#IRS-BRET/Conferences and Workshops/DataSchool FOCUS/Projects/TidyData")
-
-
-#Extract individual dataframes from nested lists
-DataFrameA <- map_df(AllData[1], ~.x) 
-DataFrameB <- map_df(AllData[2], ~.x)
-DataFrameC <- map_df(AllData[3], ~.x)
-DataFrameD <- map_df(AllData[4], ~.x)
-DataFrameE <- map_df(AllData[5], ~.x)
-DataFrameF <- map_df(AllData[6], ~.x)
+FileList <- list.files(path = "data", pattern="*.csv", full.names = TRUE)
+AllData <- map_df(FileList, read_csv, skip = 7, .id = "dataset") 
 
 #Tidy dataframes using a created function 
 
@@ -339,8 +328,8 @@ middlerow_plot <- plot_grid(Graph_A_1, Graph_B_1, Graph_C_1, Graph_D_1, Graph_E_
 bottomrow_plot <- plot_grid(Graph_A_2, Graph_B_2, Graph_C_2, Graph_D_2, Graph_E_2, Graph_F_2, 
                             nrow = 1,
                             rel_widths = c(1.4,1,1,1,1,1))
-graph_plot <- plot_grid (toprow_plot, middlerow_plot, bottomrow_plot, 
+graph_plot_raw <- plot_grid (middlerow_plot, bottomrow_plot, 
                          ncol = 1,
-                         rel_heights = c(1.5,1,1))
-
-
+                         rel_heights = c(1,1))
+ggsave("Results/raw_data.png", plot = graph_plot_raw, height = 10, width = 14)
+ggsave("Results/toprow_plot.png", plot = toprow_plot, height = 8, width = 14)
