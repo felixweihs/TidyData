@@ -140,7 +140,6 @@ analysis_summary2 <- analysis_summary %>%
     group == "eight_min" ~ "8")) %>% 
   group_by(dataset, group)
 
-rm(Stats1, Stats2)
 Stats1 <- summarise(analysis_summary2, mean = mean(value, na.rm=TRUE), SD = sd(value, na.rm=TRUE))
 Stats2 <-  analysis_summary2 %>% summarise_each(funs(sum(!is.na(.))))
 Stats_table <- full_join(Stats1, Stats2) %>% rename('incubation (min)' = group, 'n' = value) %>% ungroup()
@@ -241,8 +240,11 @@ The biosensor and the sample are incubated on the chip and the result can be see
 
 <div class="column-right">
 
-![](resources/gif/signal_anime.gif){width=300px}
-![BRET ratios on-chip](resources/gif/ratio_anime.gif){width=300px}
+
+![](resources/gif/signal_anime.gif){width=300px frontpage=}
+
+![](resources/gif/ratio_anime.gif){width=300px}
+
 **Figure 2** 'Live' signal and BRET ratios as a function of time
 
 </div>
